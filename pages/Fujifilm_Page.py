@@ -1,6 +1,8 @@
+from selenium.common import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from retry import retry
 
 from base.base_class import Base
 
@@ -46,6 +48,7 @@ class Fujifilm_Page(Base):
     def get_free_delivery(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.free_delivery)))
 
+    @retry(WebDriverException, tries=3, delay=0.3)
     def get_menu(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.menu)))
 
