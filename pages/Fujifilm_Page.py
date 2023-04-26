@@ -17,6 +17,9 @@ class Fujifilm_Page(Base):
                            "@class='bx_filter_select_container']/div[@class='bx_filter_select_block'] /div[" \
                            "@class='bx_filter_select_text']"
     free_delivery = "//label[@data-role='label_MAX_SMART_FILTER_408_1990796034']"
+    menu = "//div[@class='filter-panel__view controls-view pull-right']/a[@class='controls-view__link controls-view__link--table muted js-load-link']"
+    add_to_basket = "//span[@data-value='5500']"
+    basket = "//div[@id='bx_3966226736_957_basket_actions']/a[@href='/basket/' and @data-item='957']"
 
     max_price = "10000"
 
@@ -42,6 +45,15 @@ class Fujifilm_Page(Base):
 
     def get_free_delivery(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.free_delivery)))
+
+    def get_menu(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.menu)))
+
+    def get_add_to_basket(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.add_to_basket)))
+
+    def get_basket(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.basket)))
 
     """Actions"""
 
@@ -73,6 +85,18 @@ class Fujifilm_Page(Base):
         self.get_free_delivery().click()
         print("Click free delivery")
 
+    def click_menu(self):
+        self.get_menu().click()
+        print("Click menu")
+
+    def click_add_to_basket(self):
+        self.get_add_to_basket().click()
+        print("Click add to basket")
+
+    def click_basket(self):
+        self.get_basket().click()
+        print("Click basket")
+
     """Methods"""
 
     def set_filter_1(self):
@@ -83,3 +107,9 @@ class Fujifilm_Page(Base):
         self.click_suggestions_dropdown()
         self.set_free_delivery()
         self.set_filter()
+
+    def select_25mm(self):
+        self.get_current_url()
+        self.click_menu()
+        self.click_add_to_basket()
+        self.click_basket()
