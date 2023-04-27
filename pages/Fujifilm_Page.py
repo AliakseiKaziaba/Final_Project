@@ -22,7 +22,9 @@ class Fujifilm_Page(Base):
     menu = "//div[@class='filter-panel__view controls-view pull-right']/a[@class='controls-view__link controls-view__link--table muted js-load-link']"
     add_to_basket = "//span[@data-value='5500']"
     basket = "//div[@id='bx_3966226736_957_basket_actions']/a[@href='/basket/' and @data-item='957']"
-
+    name_lens_25mm = "//div[@class='item-title']/a[@class='dark_link js-notice-block__title']/span[contains(text(), 'Объектив TTartisan 25 мм F2 APS-C для Fuji')]"
+    price_lens_25mm = "//*[@id='bx_3966226736_957']/div/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div/span[" \
+                         "1]/span[1]"
     max_price = "10000"
 
     """Getters"""
@@ -48,7 +50,7 @@ class Fujifilm_Page(Base):
     def get_free_delivery(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.free_delivery)))
 
-    @retry(WebDriverException, tries=3, delay=0.3)
+    @retry(WebDriverException, tries=5, delay=0.3)
     def get_menu(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.menu)))
 
@@ -57,6 +59,14 @@ class Fujifilm_Page(Base):
 
     def get_basket(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.basket)))
+
+    def get_name_lens_25mm(self):
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH,
+                                                                                    self.name_lens_25mm)))
+
+    def get_price_lens_25mm(self):
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.price_lens_25mm)))
+
 
     """Actions"""
 
@@ -88,10 +98,12 @@ class Fujifilm_Page(Base):
         self.get_free_delivery().click()
         print("Click free delivery")
 
+    @retry(WebDriverException, tries=5, delay=0.3)
     def click_menu(self):
         self.get_menu().click()
         print("Click menu")
 
+    @retry(WebDriverException, tries=5, delay=0.3)
     def click_add_to_basket(self):
         self.get_add_to_basket().click()
         print("Click add to basket")

@@ -25,6 +25,15 @@ class Base():
         assert value_word == result_word
         print("Good word's value")
 
+    """Сравнение двух текстовых значений"""
+    def assert_values(self, word_1, word_2):
+        value_word_1 = word_1.text
+        print(value_word_1)
+        value_word_2 = word_2.text
+        print(value_word_2)
+        assert value_word_1 == value_word_2
+        print("Values are correct")
+
     """Получение скриншота"""
     def get_screenshot(self):
         now_date = datetime.datetime.utcnow().strftime("%Y.%m.%d.%H.%M.%S")

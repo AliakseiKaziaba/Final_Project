@@ -79,4 +79,5 @@ class Main_Page(Base):
 
     def menu_lens_fujifilm(self):
         self.click_lens_fujifilm()
+        self.get_current_url()
         self.assert_word(self.get_main_word_fuji(), 'Объективы для Fujifilm')
