@@ -41,6 +41,7 @@ class Basket_Page(Base):
         # self.assert_values(self.get_basket_name_lens_25mm, Fujifilm_Page.get_name_lens_25mm)
         self.assert_word(self.get_basket_name_lens_25mm(), 'Объектив TTartisan 25 мм F2 APS-C для Fuji')
         self.assert_word(self.get_basket_price_lens_25mm(), "5 500 ₽")
+        self.get_screenshot()
         self.click_clear_button()
 
 
