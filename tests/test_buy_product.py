@@ -27,3 +27,5 @@ def test_buy_product_1(set_up, set_group):
 
     bp = Basket_Page(driver)
     bp.assert_values_25mm()
+
+    driver.quit()
