@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -69,20 +70,22 @@ class Main_Page(Base):
     """Methods"""
 
     def authorization(self):
-        Logger.add_start_step(method="authorization")
-        self.driver.get(self.base_url)
-        self.driver.maximize_window()
-        self.get_current_url()
-        self.click_log_in()
-        self.input_user_name(self.login_standart)
-        self.input_password(self.password_all)
-        self.click_login_button()
-        self.assert_word(self.get_success_auth(), 'Вы успешно авторизовались')
-        Logger.add_end_step(url=self.driver.current_url, method="authorization")
+        with allure.step("Authorization"):
+            Logger.add_start_step(method="authorization")
+            self.driver.get(self.base_url)
+            self.driver.maximize_window()
+            self.get_current_url()
+            self.click_log_in()
+            self.input_user_name(self.login_standart)
+            self.input_password(self.password_all)
+            self.click_login_button()
+            self.assert_word(self.get_success_auth(), 'Вы успешно авторизовались')
+            Logger.add_end_step(url=self.driver.current_url, method="authorization")
 
     def menu_lens_fujifilm(self):
-        Logger.add_start_step(method="menu_lens_fujifilm")
-        self.click_lens_fujifilm()
-        self.get_current_url()
-        self.assert_word(self.get_main_word_fuji(), 'Объективы для Fujifilm')
-        Logger.add_end_step(url=self.driver.current_url, method="menu_lens_fujifilm")
+        with allure.step("Click menu Fujifilm"):
+            Logger.add_start_step(method="menu_lens_fujifilm")
+            self.click_lens_fujifilm()
+            self.get_current_url()
+            self.assert_word(self.get_main_word_fuji(), 'Объективы для Fujifilm')
+            Logger.add_end_step(url=self.driver.current_url, method="menu_lens_fujifilm")

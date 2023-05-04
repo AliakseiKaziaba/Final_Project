@@ -1,4 +1,5 @@
 import pytest
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
@@ -8,6 +9,7 @@ from pages.Basket_Page import Basket_Page
 
 
 @pytest.mark.run(order=1)
+@allure.description("Test buy product")
 def test_buy_product_1(set_up, set_group):
     op = webdriver.ChromeOptions()
     op.add_experimental_option("detach", True)

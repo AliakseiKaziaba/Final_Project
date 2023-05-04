@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -38,13 +39,14 @@ class Basket_Page(Base):
     """Methods"""
 
     def assert_values_25mm(self):
-        self.get_current_url()
-        Logger.add_start_step(method="assert_values_25mm")
-        # self.assert_values(self.get_basket_name_lens_25mm, Fujifilm_Page.get_name_lens_25mm)
-        self.assert_word(self.get_basket_name_lens_25mm(), 'Объектив TTartisan 25 мм F2 APS-C для Fuji')
-        self.assert_word(self.get_basket_price_lens_25mm(), "5 500 ₽")
-        self.get_screenshot()
-        self.click_clear_button()
-        Logger.add_end_step(url=self.driver.current_url, method="assert_values_25mm")
+        with allure.step("Assers values from previous step with bakset's values"):
+            self.get_current_url()
+            Logger.add_start_step(method="assert_values_25mm")
+            # self.assert_values(self.get_basket_name_lens_25mm, Fujifilm_Page.get_name_lens_25mm)
+            self.assert_word(self.get_basket_name_lens_25mm(), 'Объектив TTartisan 25 мм F2 APS-C для Fuji')
+            self.assert_word(self.get_basket_price_lens_25mm(), "5 500 ₽")
+            self.get_screenshot()
+            self.click_clear_button()
+            Logger.add_end_step(url=self.driver.current_url, method="assert_values_25mm")
 
 
