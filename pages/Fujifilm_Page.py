@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from retry import retry
 
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class Fujifilm_Page(Base):
@@ -115,6 +116,7 @@ class Fujifilm_Page(Base):
     """Methods"""
 
     def set_filter_1(self):
+        Logger.add_start_step(method="set_filter_1")
         self.click_get_filter()
         self.click_sort_dropdown()
         self.click_sort_by_price_ASC()
@@ -122,9 +124,13 @@ class Fujifilm_Page(Base):
         self.click_suggestions_dropdown()
         self.set_free_delivery()
         self.set_filter()
+        Logger.add_end_step(url=self.driver.current_url, method="set_filter_1")
+
 
     def select_25mm(self):
+        Logger.add_start_step(method="select_25mm")
         self.get_current_url()
         self.click_menu()
         self.click_add_to_basket()
         self.click_basket()
+        Logger.add_end_step(url=self.driver.current_url, method="select_25mm")
